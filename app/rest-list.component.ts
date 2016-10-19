@@ -6,10 +6,16 @@ import { Review } from './review.model';
   selector: 'rest-list',
   template: `
   <select (change)="onChangePrice($event.target.value)">
+    <option value="none">none</option>
     <option value="low">Low to High</option>
     <option value="high">High to low</option>
   </select>
-    <div *ngFor="let currentRestaurant of childRestaurantList | price:selectedPrice">
+  <select (change)="onChangeReview($event.target.value)">
+    <option value="none">none</option>
+    <option value="low">Low to High</option>
+    <option value="high">High to low</option>
+  </select>
+    <div *ngFor="let currentRestaurant of childRestaurantList | price:selectedPrice | rating:reviewList:selectedRating">
       <h3>{{ currentRestaurant.name }}</h3>
       <ul>
         <li>{{ currentRestaurant.specialty }}</li>
@@ -28,7 +34,8 @@ export class RestListComponent {
   @Input() reviewList: Review[];
   @Output() clickSender = new EventEmitter();
   @Output() clickSender2 = new EventEmitter();
-  public selectedPrice = "low";
+  public selectedPrice = "none";
+  public selectedRating = "none";
   public total = null;
   editButtonHasBeenClicked(RestaurantToEdit: Restaurant) {
     this.clickSender.emit(RestaurantToEdit);
@@ -40,6 +47,10 @@ export class RestListComponent {
 
   onChangePrice(optionFromMenu) {
     this.selectedPrice = optionFromMenu;
+  }
+
+  onChangeReview(optionFromMenu) {
+    this.selectedRating = optionFromMenu;
   }
 
   avgReview(restId: number) {

@@ -8,8 +8,8 @@ import { ReviewListComponent } from './review-list.component';
 import { NewRestComponent } from './new-rest.component';
 import { NewReviewComponent } from './new-review.component';
 import { PricePipe } from './price.pipe'; // import our pipe here
-
-
+import { ReviewPipe } from './review.pipe'; // import our pipe here
+import { RatingPipe } from './rating.pipe'; // import our pipe here
 
 @NgModule({
   imports: [
@@ -24,6 +24,8 @@ import { PricePipe } from './price.pipe'; // import our pipe here
     NewReviewComponent,
     ReviewListComponent,
     PricePipe,
+    ReviewPipe,
+    RatingPipe,
   ],
   bootstrap:    [ AppComponent ]
 })

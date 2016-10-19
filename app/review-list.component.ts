@@ -8,13 +8,15 @@ import { Review } from './review.model';
     <div *ngIf="SelectedRest">
       <h2>{{SelectedRest.name}} reviews</h2>
       <h3>Average Review: {{avgReview(SelectedRest.id)}}</h3>
-      <div *ngFor="let currentReview of reviewList">
-        <div *ngIf="currentReview.restaurantId == SelectedRest.id">
+      <select (change)="onChangeRating($event.target.value)">
+        <option value="low">Low to High</option>
+        <option value="high">High to low</option>
+      </select>
+      <div *ngFor="let currentReview of reviewList | review:SelectedRest.id:selectedRating">
           <h3>{{ currentReview.customerName }}</h3>
           <p>{{ currentReview.info }}</p>
           <p>{{ currentReview.rating }} out of 10</p>
           <hr>
-        </div>
       </div>
     </div>
     <button (click)="backSender()">back</button>
@@ -28,6 +30,11 @@ export class ReviewListComponent {
   backSender() {
     this.back.emit();
   }
+
+  public selectedRating= "low";
+  onChangeRating(optionFromMenu) {
+      this.selectedRating = optionFromMenu;
+    }
 
   public total = null;
 

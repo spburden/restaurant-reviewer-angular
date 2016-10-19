@@ -12,8 +12,10 @@ export class PricePipe implements PipeTransform {
       if (costType === "low") {
        input.sort(function(a, b){return a.price.length - b.price.length});
        return input;
-     } else {
+     } else if(costType === "high") {
        input.sort(function(a, b){return b.price.length - a.price.length});
+       return input;
+     } else {
        return input;
      }
   }
