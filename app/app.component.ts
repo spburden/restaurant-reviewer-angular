@@ -10,6 +10,7 @@ import { Review } from './Review.model';
     <div [hidden] = "!showList">
       <rest-list
         [childRestaurantList]="masterRestaurantList"
+        [reviewList]="masterReviewList"
         (clickSender)="showDetails($event)"
         (clickSender2)="showReview($event)"
        ></rest-list>
