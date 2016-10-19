@@ -17,14 +17,14 @@ import { Restaurant } from './Restaurant.model';
       </div>
       <div>
         <label>Rating out of 10:</label>
-        <input #newRating>
+        <input #newRating type="number" min="1" max="10" value="1">
       </div>
       <div>
+      <div id="hidden" style="display:none">
+        <p>need to be 1 - 10 for rating, need to have something in name and/or desciption</p>
+      </div>
         <button (click)="
           addClicked(newCustomerName.value, newDescription.value, newRating.value, SelectedRest.id);
-          newCustomerName.value='';
-          newDescription.value='';
-          newRating.value='';
         ">Add</button>
       </div>
     </div>
@@ -34,8 +34,14 @@ import { Restaurant } from './Restaurant.model';
 export class NewReviewComponent {
   @Input() SelectedRest: Restaurant;
   @Output() newReviewSender = new EventEmitter();
-  addClicked(customerName: string, info: string, rating: number, restaurantId: number) {
-    var newReviewToAdd: Review = new Review (customerName, info, rating, restaurantId);
-      this.newReviewSender.emit(newReviewToAdd);
+  addClicked(customerName: string, info: string, rating: string, restaurantId: number) {
+    if (parseInt(rating) >= 1 && parseInt(rating) <= 10 && info != '' && customerName != '') {
+      document.getElementById("hidden").style.display = "none";
+      var newReviewToAdd: Review = new Review (customerName, info, parseInt(rating), restaurantId);
+        this.newReviewSender.emit(newReviewToAdd);
+    } else {
+      document.getElementById("hidden").style.display = "inline";
+    }
+
   }
 }

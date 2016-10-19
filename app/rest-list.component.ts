@@ -9,7 +9,6 @@ import { Review } from './review.model';
     <option value="low">Low to High</option>
     <option value="high">High to low</option>
   </select>
-  {{reviewList[0].customerName}}
     <div *ngFor="let currentRestaurant of childRestaurantList | price:selectedPrice">
       <h3>{{ currentRestaurant.name }}</h3>
       <ul>
@@ -46,24 +45,22 @@ export class RestListComponent {
   avgReview(restId: number) {
     var avg: number = 0;
     var counter: number = 0;
-    console.log(restId);
     if (this.reviewList) {
-      console.log(this.reviewList)
       for (var i = 0; i < this.reviewList.length; i++) {
         if (restId ===  this.reviewList[i].restaurantId) {
-          avg += this.reviewList[i].rating;
+          var next = avg;
+          avg = next + this.reviewList[i].rating;
           counter++;
         }
       }
-
       if (avg != 0  && counter != 0) {
-        this.total = avg / counter
+        this.total = (avg / counter).toFixed(2);
       } else {
-        this.total = "no rating yet"
+        this.total = "no rating yet";
       }
+
       return this.total;
     }
-
   }
 
 }
