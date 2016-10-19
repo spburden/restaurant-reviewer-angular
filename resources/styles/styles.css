@@ -1,0 +1,10 @@
+body {
+  background-image: url("http://68.media.tumblr.com/cf875977c0c86e9c917e93b9058c5b36/tumblr_o8tzr4vQG51rlapeio4_540.gif");
+  background-repeat: repeat-x;
+  background-color: black;
+}
+
+.container {
+  background-color: gray;
+  margin-top: 230px;
+}
