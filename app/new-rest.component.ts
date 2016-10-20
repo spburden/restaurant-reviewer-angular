@@ -27,7 +27,7 @@ import { Restaurant } from './Restaurant.model';
               <input class="form-control" #newAddress>
             </div>
             <div class="form-group">
-              <label>Enter Restaurant Price</label>
+              <label>Enter Restaurant Price ($-$$$$$)</label>
               <input class="form-control" #newPrice>
             </div>
           </div>

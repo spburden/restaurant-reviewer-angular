@@ -1,6 +1,9 @@
 body {
-  background-image: url("http://68.media.tumblr.com/cf875977c0c86e9c917e93b9058c5b36/tumblr_o8tzr4vQG51rlapeio4_540.gif"), url("http://static.fjcdn.com/pictures/Star_8fd81f_956528.jpg");
-  background-repeat: repeat-x, repeat;
+  background-image: url("http://68.media.tumblr.com/cf875977c0c86e9c917e93b9058c5b36/tumblr_o8tzr4vQG51rlapeio4_540.gif"),url("http://static.fjcdn.com/pictures/Star_8fd81f_956528.jpg"), ;
+  background-repeat: repeat-x, repeat-y;
+  background-position: left top, right;
+  background-color: blue;
+  font-family: 'Space Mono', monospace;
 }
 
 .container {

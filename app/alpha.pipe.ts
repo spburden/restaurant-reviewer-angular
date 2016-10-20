@@ -20,9 +20,9 @@ export class AlphaPipe implements PipeTransform {
           return 0;
       });
 
-      // if (alphaType === "za"){
-      //   input.reverse();
-      // }
+      if (alphaType === "za"){
+        input.reverse();
+      }
       return input;
     }
     return input;

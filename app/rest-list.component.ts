@@ -38,7 +38,7 @@ import { Review } from './review.model';
     </div>
   <div class="col-md-3">
     <div class="form-group">
-      <label>Filter By specialty</label>
+      <label>Filter By Cuisine</label>
       <select class="form-control" (change)="onChangeSpecialty($event.target.value)">
         <option value="none">none</option>
         <option *ngFor="let currentRestaurant of childRestaurantList | removeDouble" value="{{currentRestaurant.specialty}}">{{ currentRestaurant.specialty }}</option>
@@ -47,14 +47,14 @@ import { Review } from './review.model';
   </div>
 
    <div class="row">
-      <div *ngFor="let currentRestaurant of childRestaurantList | price:selectedPrice | rating:reviewList:selectedRating | specialty:selectedSpecialty" class="col-md-4">
+      <div *ngFor="let currentRestaurant of childRestaurantList | price:selectedPrice | rating:reviewList:selectedRating | specialty:selectedSpecialty | alpha:selectedAlpha" class="col-md-4">
         <div class="well">
-          <h3>{{ currentRestaurant.name }}</h3>
+          <h3>{{ currentRestaurant.name }} <i class="fa fa-anchor" aria-hidden="true"></i></h3>
           <ul>
             <li>{{ currentRestaurant.specialty }}</li>
             <li>{{ currentRestaurant.address }}</li>
             <li>{{ currentRestaurant.price }}</li>
-            <li>Review avg: {{avgReview(currentRestaurant.id)}}</li>
+            <li>Average Rating: {{avgReview(currentRestaurant.id)}}</li>
             <div class="star-ratings-css" *ngIf="avgReview(currentRestaurant.id) == 'no rating yet'">
               <div class="star-ratings-css-top" [style.width.%]="(125/100) * 0"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
               <div class="star-ratings-css-bottom"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
@@ -67,7 +67,7 @@ import { Review } from './review.model';
           </ul>
           <!-- Button trigger modal -->
           <button (click)="reviewButtonHasBeenClicked(currentRestaurant)" type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-            review
+            Reviews
           </button>
           <button (click)="editButtonHasBeenClicked(currentRestaurant)" class="btn btn-info btn-lg" data-toggle="modal" data-target="#edit">Edit</button>
         </div>

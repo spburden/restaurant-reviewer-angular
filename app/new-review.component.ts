@@ -17,7 +17,7 @@ import { Restaurant } from './Restaurant.model';
       </div>
       <div class="form-group">
         <label>Rating out of 10:</label>
-        <input class="form-control" #newRating type="number" min="1" max="10" value="1">
+        <input class="form-control" #newRating type="number" min="1" max="10">
       </div>
       <div class="form-group">
       <div id="hidden" style="display:none">
@@ -25,6 +25,9 @@ import { Restaurant } from './Restaurant.model';
       </div>
         <button class="btn btn-info"(click)="
           addClicked(newCustomerName.value, newDescription.value, newRating.value, SelectedRest.id);
+          newCustomerName.value='';
+          newDescription.value='';
+          newRating.value='';
         ">Add</button>
       </div>
     </div>

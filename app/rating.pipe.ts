@@ -44,7 +44,7 @@ export class RatingPipe implements PipeTransform {
         }
         return totalAvg[0] - totalAvg[1]
       });
-      // return restaurantList;
+      return restaurantList;
     } else if (ratingType === "high") {
       restaurantList.sort(function(a, b) {
         var dataRest: Restaurant[] = [a, b];
@@ -70,7 +70,7 @@ export class RatingPipe implements PipeTransform {
         }
         return totalAvg[1] - totalAvg[0]
       });
-      // return restaurantList;
+      return restaurantList;
 
     } else {
       return restaurantList;

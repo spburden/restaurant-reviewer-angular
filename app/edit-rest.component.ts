@@ -30,7 +30,7 @@ import { Restaurant } from './restaurant.model';
                   <input class="form-control" type="text" [(ngModel)]="childSelectedRestaurant.address" />
                 </div>
                 <div class="form-group">
-                  <label>Edit Price</label>
+                  <label>Edit Price ($-$$$$$)</label>
                   <input class="form-control" type="text" [(ngModel)]="childSelectedRestaurant.price" />
                 </div>
               </div>

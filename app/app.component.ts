@@ -66,6 +66,8 @@ export class AppComponent {
   ];
   public masterReviewList: Review[] = [
     new Review("Adam", "The food is ok", 7.3, 0),
+    new Review("Steve", "The food is blahhhh blahhh", 5.3, 1),
+    new Review("Caleb", "The food is superbb bro!", 8.9, 2)
   ];
 
   selectedRestaurant: Restaurant = null;
