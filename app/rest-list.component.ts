@@ -37,6 +37,10 @@ import { Review } from './review.model';
         <li>{{ currentRestaurant.price }}</li>
         <li>Review avg: {{avgReview(currentRestaurant.id)}}</li>
       </ul>
+      <!-- Button trigger modal -->
+    <button (click)="reviewButtonHasBeenClicked(currentRestaurant)" type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+      review
+    </button>
       <button (click)="editButtonHasBeenClicked(currentRestaurant)">Edit</button>
       <button (click)="reviewButtonHasBeenClicked(currentRestaurant)">review</button>
     </div>

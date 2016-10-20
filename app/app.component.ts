@@ -22,18 +22,34 @@ import { Review } from './Review.model';
       >
       </edit-rest>
     </div>
-    <div [hidden] = "!showReviewData">
-      <review-list
-        [SelectedRest]="selectedRestaurant"
-        [reviewList]="masterReviewList"
-        (back)="finished()"
-      ></review-list>
-      <new-review
-        [SelectedRest]="selectedRestaurant"
-        (newReviewSender)="addReview($event)"
-      ></new-review>
+      <!-- Modal -->
+      <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              <h4 class="modal-title" id="myModalLabel">Reviews</h4>
+            </div>
+            <div class="modal-body">
+            <review-list
+              [SelectedRest]="selectedRestaurant"
+              [reviewList]="masterReviewList"
+              (back)="finished()"
+            ></review-list>
+            <new-review
+              [SelectedRest]="selectedRestaurant"
+              (newReviewSender)="addReview($event)"
+            ></new-review>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
 
-    </div>
     <div [hidden]= "!showNew">
       <new-rest
         [newRestId] = "masterRestaurantList.length"
@@ -57,8 +73,8 @@ export class AppComponent {
   ];
   showList = true;
   showEdit = false;
-  showNew = false;
-  showReviewData = false;
+  showNew = true;
+  showReviewData = true;
   selectedRestaurant: Restaurant = null;
   showDetails(clickedRestaurant: Restaurant) {
     this.showList = false;
@@ -87,10 +103,6 @@ export class AppComponent {
   }
 
   showReview(clickedRestaurant: Restaurant) {
-    this.showList = false;
-    this.showEdit = false;
-    this.showNew = false;
-    this.showReviewData = true;
     this.selectedRestaurant = clickedRestaurant;
   }
 

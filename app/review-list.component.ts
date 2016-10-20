@@ -5,21 +5,29 @@ import { Review } from './review.model';
 @Component({
   selector: 'review-list',
   template: `
-    <div *ngIf="SelectedRest">
-      <h2>{{SelectedRest.name}} reviews</h2>
-      <h3>Average Review: {{avgReview(SelectedRest.id)}}</h3>
-      <select (change)="onChangeRating($event.target.value)">
-        <option value="low">Low to High</option>
-        <option value="high">High to low</option>
-      </select>
-      <div *ngFor="let currentReview of reviewList | review:SelectedRest.id:selectedRating">
-          <h3>{{ currentReview.customerName }}</h3>
-          <p>{{ currentReview.info }}</p>
-          <p>{{ currentReview.rating }} out of 10</p>
-          <hr>
-      </div>
+  <div *ngIf="SelectedRest">
+    <h2>{{SelectedRest.name}} reviews</h2>
+    <h3>Average Review: {{avgReview(SelectedRest.id)}}</h3>
+    <div class="star-ratings-css">
+      <div class="star-ratings-css-top" [style.width.%]="(125/100) *(currentReview.rating * 10)"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+      <div class="star-ratings-css-bottom"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
     </div>
-    <button (click)="backSender()">back</button>
+    <select (change)="onChangeRating($event.target.value)">
+      <option value="low">Low to High</option>
+      <option value="high">High to low</option>
+    </select>
+    <div *ngFor="let currentReview of reviewList | review:SelectedRest.id:selectedRating">
+        <h3>{{ currentReview.customerName }}</h3>
+        <p>{{ currentReview.info }}</p>
+        <p> {{ currentReview.rating }} out of 10</p>
+
+        <div class="star-ratings-css">
+          <div class="star-ratings-css-top" [style.width.%]="(125/100) *(currentReview.rating * 10)"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+          <div class="star-ratings-css-bottom"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+        </div>
+        <hr>
+    </div>
+  </div>
   `
 })
 
