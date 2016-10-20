@@ -12,6 +12,7 @@ import { ReviewPipe } from './review.pipe'; // import our pipe here
 import { RatingPipe } from './rating.pipe'; // import our pipe here
 import { RemoveDoublePipe } from './removeDouble.pipe'; // import our pipe here
 import { SpecialtyPipe } from './specialty.pipe'; // import our pipe here
+import { AlphaPipe } from './alpha.pipe'; // import our pipe here
 
 @NgModule({
   imports: [
@@ -30,6 +31,7 @@ import { SpecialtyPipe } from './specialty.pipe'; // import our pipe here
     RatingPipe,
     RemoveDoublePipe,
     SpecialtyPipe,
+    AlphaPipe,
   ],
   bootstrap:    [ AppComponent ]
 })

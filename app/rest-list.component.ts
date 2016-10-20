@@ -17,13 +17,19 @@ import { Review } from './review.model';
     <option value="low">Low to High</option>
     <option value="high">High to low</option>
   </select>
+  <label>Alphabetize</label>
+  <select (change)="onChangeAlpha($event.target.value)">
+    <option value="none">none</option>
+    <option value="az">A - Z</option>
+    <option value="za">Z - A</option>
+  </select>
 
   <label>Filter By specialty</label>
   <select (change)="onChangeSpecialty($event.target.value)">
     <option value="none">none</option>
     <option *ngFor="let currentRestaurant of childRestaurantList | removeDouble" value="{{currentRestaurant.specialty}}">{{ currentRestaurant.specialty }}</option>
   </select>
-    <div *ngFor="let currentRestaurant of childRestaurantList | price:selectedPrice | rating:reviewList:selectedRating| specialty:selectedSpecialty">
+    <div *ngFor="let currentRestaurant of childRestaurantList | price:selectedPrice | rating:reviewList:selectedRating | specialty:selectedSpecialty">
       <h3>{{ currentRestaurant.name }}</h3>
       <ul>
         <li>{{ currentRestaurant.specialty }}</li>
@@ -45,6 +51,7 @@ export class RestListComponent {
   public selectedPrice = "none";
   public selectedRating = "none";
   public selectedSpecialty = "none";
+  public selectedAlpha = "none";
   public total = null;
   editButtonHasBeenClicked(RestaurantToEdit: Restaurant) {
     this.clickSender.emit(RestaurantToEdit);
@@ -64,6 +71,10 @@ export class RestListComponent {
 
   onChangeSpecialty(optionFromMenu) {
     this.selectedSpecialty = optionFromMenu;
+  }
+
+  onChangeAlpha(optionFromMenu) {
+    this.selectedAlpha = optionFromMenu;
   }
 
   avgReview(restId: number) {

@@ -47,10 +47,10 @@ import { Review } from './Review.model';
 
 export class AppComponent {
   public masterRestaurantList: Restaurant[] = [
-      new Restaurant("Bob's grill", "Steak house", "249 one way area, Portland, or", "$$", 0),
-      new Restaurant("Adam's grill", "Steak house", "242 one way area, Portland, or", "$$$$$", 3),
-      new Restaurant("Zaytoon", "Mediteranien", "Portland, or", "$$$$", 1),
-      new Restaurant("Mumbai Spice", "Indian", "249 one way area, Portland, or", "$$$", 2),
+      new Restaurant("Bob's Grill", "Steak House", "249 One Way Area, Portland, OR", "$$", 0),
+      new Restaurant("Adam's Grill", "Steak House", "242 One way area, Portland, OR", "$$$$$", 3),
+      new Restaurant("Zaytoon", "Mediteranien", "Portland, OR", "$$$$", 1),
+      new Restaurant("Mumbai Spice", "Indian", "242329 One Way Area, Portland, OR", "$$$", 2),
   ];
   public masterReviewList: Review[] = [
     new Review("Adam", "The food is ok", 7, 0),

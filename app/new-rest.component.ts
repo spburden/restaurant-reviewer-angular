@@ -37,7 +37,16 @@ import { Restaurant } from './Restaurant.model';
 export class NewRestComponent {
   @Input() newRestId: number;
   @Output() newRestSender = new EventEmitter();
+
   addClicked(name: string, specialty: string, address: string, price: string, id: number) {
+    function titleCase(string) {
+      return string.split(' ').map(function(val){
+        return val.charAt(0).toUpperCase() + val.substr(1).toLowerCase();
+      }).join(' ');
+    }
+    name = titleCase(name);
+    specialty = titleCase(specialty);
+    address = titleCase(address);
     var newRestaurantToAdd: Restaurant = new Restaurant(name, specialty, address, price, id);
     this.newRestSender.emit(newRestaurantToAdd);
   }
