@@ -5,17 +5,25 @@ import { Review } from './review.model';
 @Component({
   selector: 'rest-list',
   template: `
+  <label>Filter By Price</label>
   <select (change)="onChangePrice($event.target.value)">
     <option value="none">none</option>
     <option value="low">Low to High</option>
     <option value="high">High to low</option>
   </select>
+  <label>Filter By Rating</label>
   <select (change)="onChangeReview($event.target.value)">
     <option value="none">none</option>
     <option value="low">Low to High</option>
     <option value="high">High to low</option>
   </select>
-    <div *ngFor="let currentRestaurant of childRestaurantList | price:selectedPrice | rating:reviewList:selectedRating">
+
+  <label>Filter By specialty</label>
+  <select (change)="onChangeSpecialty($event.target.value)">
+    <option value="none">none</option>
+    <option *ngFor="let currentRestaurant of childRestaurantList | removeDouble" value="{{currentRestaurant.specialty}}">{{ currentRestaurant.specialty }}</option>
+  </select>
+    <div *ngFor="let currentRestaurant of childRestaurantList | price:selectedPrice | rating:reviewList:selectedRating| specialty:selectedSpecialty">
       <h3>{{ currentRestaurant.name }}</h3>
       <ul>
         <li>{{ currentRestaurant.specialty }}</li>
@@ -36,6 +44,7 @@ export class RestListComponent {
   @Output() clickSender2 = new EventEmitter();
   public selectedPrice = "none";
   public selectedRating = "none";
+  public selectedSpecialty = "none";
   public total = null;
   editButtonHasBeenClicked(RestaurantToEdit: Restaurant) {
     this.clickSender.emit(RestaurantToEdit);
@@ -51,6 +60,10 @@ export class RestListComponent {
 
   onChangeReview(optionFromMenu) {
     this.selectedRating = optionFromMenu;
+  }
+
+  onChangeSpecialty(optionFromMenu) {
+    this.selectedSpecialty = optionFromMenu;
   }
 
   avgReview(restId: number) {

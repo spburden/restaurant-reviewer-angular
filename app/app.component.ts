@@ -16,7 +16,11 @@ import { Review } from './Review.model';
        ></rest-list>
     </div>
     <div [hidden] = "!showEdit">
-
+      <edit-rest
+      [childSelectedRestaurant]="selectedRestaurant"
+      (doneClickedSender)="finished()"
+      >
+      </edit-rest>
     </div>
     <div [hidden] = "!showReviewData">
       <review-list
@@ -44,8 +48,9 @@ import { Review } from './Review.model';
 export class AppComponent {
   public masterRestaurantList: Restaurant[] = [
       new Restaurant("Bob's grill", "Steak house", "249 one way area, Portland, or", "$$", 0),
+      new Restaurant("Adam's grill", "Steak house", "242 one way area, Portland, or", "$$$$$", 3),
       new Restaurant("Zaytoon", "Mediteranien", "Portland, or", "$$$$", 1),
-      new Restaurant("Mumbai Spice", "Indian", "249 one way area, Portland, or", "$$$", 2)
+      new Restaurant("Mumbai Spice", "Indian", "249 one way area, Portland, or", "$$$", 2),
   ];
   public masterReviewList: Review[] = [
     new Review("Adam", "The food is ok", 7, 0),
