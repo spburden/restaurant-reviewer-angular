@@ -7,21 +7,17 @@ import { Review } from './Review.model';
   template: `
   <div class="container">
     <h1>Maz Kanata Restaurant list</h1>
-    <div [hidden] = "!showList">
       <rest-list
         [childRestaurantList]="masterRestaurantList"
         [reviewList]="masterReviewList"
         (clickSender)="showDetails($event)"
         (clickSender2)="showReview($event)"
        ></rest-list>
-    </div>
-    <div [hidden] = "!showEdit">
       <edit-rest
       [childSelectedRestaurant]="selectedRestaurant"
       (doneClickedSender)="finished()"
       >
       </edit-rest>
-    </div>
       <!-- Modal -->
       <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -49,15 +45,15 @@ import { Review } from './Review.model';
           </div>
         </div>
       </div>
-
-    <div [hidden]= "!showNew">
       <new-rest
         [newRestId] = "masterRestaurantList.length"
         (newRestSender)="addRest($event)"
       ></new-rest>
-    </div>
-    <button [hidden] = "!showList" (click)="add()">Add Restaurant</button>
+    <button class="btn btn-info btn-lg" data-toggle="modal" data-target="#newRest">Add Restaurant</button>
+    <br />
+    <br />
   </div>
+
   `
 })
 
@@ -66,35 +62,20 @@ export class AppComponent {
       new Restaurant("Bob's Grill", "Steak House", "249 One Way Area, Portland, OR", "$$", 0),
       new Restaurant("Adam's Grill", "Steak House", "242 One way area, Portland, OR", "$$$$$", 3),
       new Restaurant("Zaytoon", "Mediteranien", "Portland, OR", "$$$$", 1),
-      new Restaurant("Mumbai Spice", "Indian", "242329 One Way Area, Portland, OR", "$$$", 2),
+      new Restaurant("Mumbai Spice", "Indian", "246 One Way Area, Portland, OR", "$$$", 2),
   ];
   public masterReviewList: Review[] = [
-    new Review("Adam", "The food is ok", 7, 0),
+    new Review("Adam", "The food is ok", 7.3, 0),
   ];
-  showList = true;
-  showEdit = false;
-  showNew = true;
-  showReviewData = true;
+
   selectedRestaurant: Restaurant = null;
   showDetails(clickedRestaurant: Restaurant) {
-    this.showList = false;
-    this.showEdit = true;
-    this.showNew = false;
-    this.showReviewData = false;
     this.selectedRestaurant = clickedRestaurant;
   }
   finished() {
-    this.showList = true;
-    this.showEdit = false;
-    this.showNew = false;
-    this.showReviewData = false;
     this.selectedRestaurant = null;
   }
   addRest(newRestaurantFromChild: Restaurant) {
-    this.showList = true;
-    this.showEdit = false;
-    this.showNew = false;
-    this.showReviewData = false;
     this.masterRestaurantList.push(newRestaurantFromChild);
   }
 
@@ -104,11 +85,5 @@ export class AppComponent {
 
   showReview(clickedRestaurant: Restaurant) {
     this.selectedRestaurant = clickedRestaurant;
-  }
-
-  add() {
-    this.showList = false;
-    this.showEdit = false;
-    this.showNew = true;
   }
 }

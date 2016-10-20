@@ -4,32 +4,44 @@ import { Restaurant } from './Restaurant.model';
 @Component({
   selector: 'new-rest',
   template: `
-    <h1>New Restaurant</h1>
-    <div>
-      <label>Enter Restaurant name:</label>
-      <input #newName>
-    </div>
-    <div>
-      <label>Enter Restaurant Specialty:</label>
-      <input #newSpecialty>
-    </div>
-    <div>
-      <label>Enter Restaurant Address:</label>
-      <input #newAddress>
-    </div>
-    <div>
-      <label>Enter Restaurant Price</label>
-      <input #newPrice>
-    </div>
-    <div>
-      <label>Enter Restaurant Priority:</label>
-      <button (click)="
-        addClicked(newName.value, newSpecialty.value, newAddress.value, newPrice.value, newRestId);
-        newName.value='';
-        newSpecialty.value='';
-        newAddress.value='';
-        newPrice.value='';
-      ">Add</button>
+    <div class="modal fade" id="newRest" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title" id="myModalLabel">New Restaurant</h4>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <label>Enter Restaurant name:</label>
+              <input class="form-control" #newName>
+            </div>
+            <div class="form-group">
+              <label>Enter Restaurant Specialty:</label>
+              <input class="form-control" #newSpecialty>
+            </div>
+            <div class="form-group">
+              <label>Enter Restaurant Address:</label>
+              <input class="form-control" #newAddress>
+            </div>
+            <div class="form-group">
+              <label>Enter Restaurant Price</label>
+              <input class="form-control" #newPrice>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="
+              addClicked(newName.value, newSpecialty.value, newAddress.value, newPrice.value, newRestId);
+              newName.value='';
+              newSpecialty.value='';
+              newAddress.value='';
+              newPrice.value='';
+            ">Add</button>
+          </div>
+        </div>
+      </div>
     </div>
   `
 })

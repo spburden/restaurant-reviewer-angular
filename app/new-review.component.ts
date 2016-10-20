@@ -7,23 +7,23 @@ import { Restaurant } from './Restaurant.model';
   template: `
     <div *ngIf="SelectedRest">
       <h1>New Review for {{SelectedRest.name}}</h1>
-      <div>
+      <div class="form-group">
         <label>Enter your Name:</label>
-        <input #newCustomerName>
+        <input class="form-control" #newCustomerName>
       </div>
-      <div>
+      <div class="form-group">
         <label>Enter Description:</label>
-        <input #newDescription>
+        <input class="form-control" #newDescription>
       </div>
-      <div>
+      <div class="form-group">
         <label>Rating out of 10:</label>
-        <input #newRating type="number" min="1" max="10" value="1">
+        <input class="form-control" #newRating type="number" min="1" max="10" value="1">
       </div>
-      <div>
+      <div class="form-group">
       <div id="hidden" style="display:none">
         <p>need to be 1 - 10 for rating, need to have something in name and/or desciption</p>
       </div>
-        <button (click)="
+        <button class="btn btn-info"(click)="
           addClicked(newCustomerName.value, newDescription.value, newRating.value, SelectedRest.id);
         ">Add</button>
       </div>
@@ -37,7 +37,7 @@ export class NewReviewComponent {
   addClicked(customerName: string, info: string, rating: string, restaurantId: number) {
     if (parseInt(rating) >= 1 && parseInt(rating) <= 10 && info != '' && customerName != '') {
       document.getElementById("hidden").style.display = "none";
-      var newReviewToAdd: Review = new Review (customerName, info, parseInt(rating), restaurantId);
+      var newReviewToAdd: Review = new Review (customerName, info, parseFloat(rating), restaurantId);
         this.newReviewSender.emit(newReviewToAdd);
     } else {
       document.getElementById("hidden").style.display = "inline";

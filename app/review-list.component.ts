@@ -8,8 +8,8 @@ import { Review } from './review.model';
   <div *ngIf="SelectedRest">
     <h2>{{SelectedRest.name}} reviews</h2>
     <h3>Average Review: {{avgReview(SelectedRest.id)}}</h3>
-    <div class="star-ratings-css">
-      <div class="star-ratings-css-top" [style.width.%]="(125/100) *(currentReview.rating * 10)"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+    <div class="star-ratings-css" *ngIf="avgReview(SelectedRest.id) != 'no rating yet'">
+      <div class="star-ratings-css-top" [style.width.%]="(125/100) * (avgReview(SelectedRest.id) * 10)"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
       <div class="star-ratings-css-bottom"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
     </div>
     <select (change)="onChangeRating($event.target.value)">
@@ -20,9 +20,8 @@ import { Review } from './review.model';
         <h3>{{ currentReview.customerName }}</h3>
         <p>{{ currentReview.info }}</p>
         <p> {{ currentReview.rating }} out of 10</p>
-
         <div class="star-ratings-css">
-          <div class="star-ratings-css-top" [style.width.%]="(125/100) *(currentReview.rating * 10)"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+          <div class="star-ratings-css-top" [style.width.%]="(125/100) * (currentReview.rating * 10)"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
           <div class="star-ratings-css-bottom"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
         </div>
         <hr>

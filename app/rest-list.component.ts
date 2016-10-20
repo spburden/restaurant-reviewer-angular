@@ -5,44 +5,73 @@ import { Review } from './review.model';
 @Component({
   selector: 'rest-list',
   template: `
-  <label>Filter By Price</label>
-  <select (change)="onChangePrice($event.target.value)">
-    <option value="none">none</option>
-    <option value="low">Low to High</option>
-    <option value="high">High to low</option>
-  </select>
-  <label>Filter By Rating</label>
-  <select (change)="onChangeReview($event.target.value)">
-    <option value="none">none</option>
-    <option value="low">Low to High</option>
-    <option value="high">High to low</option>
-  </select>
-  <label>Alphabetize</label>
-  <select (change)="onChangeAlpha($event.target.value)">
-    <option value="none">none</option>
-    <option value="az">A - Z</option>
-    <option value="za">Z - A</option>
-  </select>
+  <div class="row">
+    <div class="col-md-3">
+      <div class="form-group">
+        <label>Filter By Price</label>
+        <select class="form-control" (change)="onChangePrice($event.target.value)">
+          <option value="none">none</option>
+          <option value="low">Low to High</option>
+          <option value="high">High to low</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="form-group">
+        <label>Filter By Rating</label>
+        <select class="form-control" (change)="onChangeReview($event.target.value)">
+          <option value="none">none</option>
+          <option value="low">Low to High</option>
+          <option value="high">High to low</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="form-group">
+        <label>Alphabetize</label>
+        <select class="form-control" (change)="onChangeAlpha($event.target.value)">
+          <option value="none">none</option>
+          <option value="az">A - Z</option>
+          <option value="za">Z - A</option>
+        </select>
+      </div>
+    </div>
+  <div class="col-md-3">
+    <div class="form-group">
+      <label>Filter By specialty</label>
+      <select class="form-control" (change)="onChangeSpecialty($event.target.value)">
+        <option value="none">none</option>
+        <option *ngFor="let currentRestaurant of childRestaurantList | removeDouble" value="{{currentRestaurant.specialty}}">{{ currentRestaurant.specialty }}</option>
+      </select>
+    </div>
+  </div>
 
-  <label>Filter By specialty</label>
-  <select (change)="onChangeSpecialty($event.target.value)">
-    <option value="none">none</option>
-    <option *ngFor="let currentRestaurant of childRestaurantList | removeDouble" value="{{currentRestaurant.specialty}}">{{ currentRestaurant.specialty }}</option>
-  </select>
-    <div *ngFor="let currentRestaurant of childRestaurantList | price:selectedPrice | rating:reviewList:selectedRating | specialty:selectedSpecialty">
-      <h3>{{ currentRestaurant.name }}</h3>
-      <ul>
-        <li>{{ currentRestaurant.specialty }}</li>
-        <li>{{ currentRestaurant.address }}</li>
-        <li>{{ currentRestaurant.price }}</li>
-        <li>Review avg: {{avgReview(currentRestaurant.id)}}</li>
-      </ul>
-      <!-- Button trigger modal -->
-    <button (click)="reviewButtonHasBeenClicked(currentRestaurant)" type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-      review
-    </button>
-      <button (click)="editButtonHasBeenClicked(currentRestaurant)">Edit</button>
-      <button (click)="reviewButtonHasBeenClicked(currentRestaurant)">review</button>
+   <div class="row">
+      <div *ngFor="let currentRestaurant of childRestaurantList | price:selectedPrice | rating:reviewList:selectedRating | specialty:selectedSpecialty" class="col-md-4">
+        <div class="well">
+          <h3>{{ currentRestaurant.name }}</h3>
+          <ul>
+            <li>{{ currentRestaurant.specialty }}</li>
+            <li>{{ currentRestaurant.address }}</li>
+            <li>{{ currentRestaurant.price }}</li>
+            <li>Review avg: {{avgReview(currentRestaurant.id)}}</li>
+            <div class="star-ratings-css" *ngIf="avgReview(currentRestaurant.id) == 'no rating yet'">
+              <div class="star-ratings-css-top" [style.width.%]="(125/100) * 0"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+              <div class="star-ratings-css-bottom"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+            </div>
+
+            <div class="star-ratings-css" *ngIf="avgReview(currentRestaurant.id) != 'no rating yet'">
+              <div class="star-ratings-css-top" [style.width.%]="(125/100) * (avgReview(currentRestaurant.id) * 10)"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+              <div class="star-ratings-css-bottom"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+            </div>
+          </ul>
+          <!-- Button trigger modal -->
+          <button (click)="reviewButtonHasBeenClicked(currentRestaurant)" type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+            review
+          </button>
+          <button (click)="editButtonHasBeenClicked(currentRestaurant)" class="btn btn-info btn-lg" data-toggle="modal" data-target="#edit">Edit</button>
+        </div>
+      </div>
     </div>
   `
 })
